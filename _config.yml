@@ -107,6 +107,6 @@ theme: butterfly
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repository: https://github.com/Muxiner/crazyBlog.git
+  repository: https://github.com/Muxiner/muxiner.github.io.git
   # repo: https://github.com/Muxiner/muxiner-blog.git
   branch: master
