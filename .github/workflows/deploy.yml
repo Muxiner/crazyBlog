@@ -27,6 +27,11 @@ jobs:
       if: steps.cache.outputs.cache-hit != 'true'
       run: npm ci
     
+    - name: Generate files
+      # 编译 markdown 文件
+      run: |
+        hexo clean
+        hexo generate
     # Deploy hexo blog website.
     - name: Deploy
       id: deploy
