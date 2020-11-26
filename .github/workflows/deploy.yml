@@ -8,39 +8,57 @@ jobs:
   blog-cicd:
     name: Hexo blog build & deploy
     runs-on: ubuntu-latest # 使用最新的 Ubuntu 系统作为编译部署的环境
+
+    
     steps:
     - name: Checkout codes
+    # 将仓库内master分支的内容下载到工作目录
       uses: actions/checkout@v2
+      # 脚本来自 https://github.com/actions/checkout
+
     - name: Setup node
       # 设置 node.js 环境
       uses: actions/setup-node@v1
+      # 配置脚本来自 https://github.com/actions/setup-node
       with:
         node-version: '12.x'
-    - name: Cache node modules
-      # 设置包缓存目录，避免每次下载
-      uses: actions/cache@v1
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-    - name: Install hexo dependencies
-      # 下载 hexo-cli 脚手架及相关安装包
+
+
+    - name: Setup Hexo env
+      env: 
+        ACTION_DEPLOY_KEY: ${{ secrets.MY_HEXO_DEPLOY }}
       run: |
-        npm install -g hexo-cli
-        npm install
-    - name: Generate files
-      # 编译 markdown 文件
+        
+        mkdir -p ~/.ssh/
+        echo "$ACTION_DEPLOY_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan github.com >> ~/.ssh/known_hosts
+        # set git infomation
+        git config --global user.name 'muxiner' 
+        git config --global user.email 'hz15211522007@163.com'
+        
+        npm i -g hexo-cli
+        npm i
+        npm install hexo-deployer-git
+        npm i -S hexo-generator-search
+        hexo-generator-json-content
+        npm i -S hexo-renderer-stylus
+        npm install hexo-wordcount
+        npm install hexo-renderer-pug
+        npm install hexo-asset-image
+
+        npm install --global gulp-cli
+        npm install gulp-htmlclean --save-dev
+        npm install --save gulp-htmlmin
+        npm install gulp-clean-css --save-dev
+        npm install --save-dev gulp-uglify
+        npm install terser
+        npm install --save-dev gulp-imagemin
+
+ 
+    - name: Deploy
       run: |
         hexo clean
         hexo generate
-    - name: Deploy hexo blog
-      env: 
-        # Github 仓库
-        GITHUB_REPO: github.com/muxiner/muxiner.github.io
-      # 将编译后的博客文件推送到指定仓库
-      run: |
-        cd ./public && git init && git add .
-        git config user.name "muxiner"
-        git config user.email "hz15211522007@163.com"
-        git add .
-        git commit -m "GitHub Actions Auto Builder at $(date +'%Y-%m-%d %H:%M:%S')"
-        git push --force --quiet "https://${{ secrets.HEXO_DEPLOY_PRI }}@$GITHUB_REPO" master:master
+        gulp
+        hexo deploy
