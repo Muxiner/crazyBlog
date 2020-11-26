@@ -41,7 +41,6 @@ jobs:
         npm i
         npm install hexo-deployer-git
         npm i -S hexo-generator-search
-        hexo-generator-json-content
         npm i -S hexo-renderer-stylus
         npm install hexo-wordcount
         npm install hexo-renderer-pug
