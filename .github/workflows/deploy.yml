@@ -1,67 +1,51 @@
-name: Deploy
+name: Blog CI/CD
 
 on:
   push:
-    branches:
-      - gh-pages
+    branches: 
+      - master
 
-
+env:
+  TZ: Asia/Shanghai
 
 jobs:
   blog-cicd:
     name: Hexo blog build & deploy
-    runs-on: ubuntu-latest # 使用最新的 Ubuntu 系统作为编译部署的环境
+    runs-on: ubuntu-latest
 
-    
     steps:
     - name: Checkout codes
-    # 将仓库内master分支的内容下载到工作目录
       uses: actions/checkout@v2
-      # 脚本来自 https://github.com/actions/checkout
 
     - name: Setup node
-      # 设置 node.js 环境
       uses: actions/setup-node@v1
-      # 配置脚本来自 https://github.com/actions/setup-node
       with:
         node-version: '12.x'
 
+    - name: Cache node modules
+      uses: actions/cache@v1
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
 
-    - name: Setup Hexo env
-      env: 
-        ACTION_DEPLOY_KEY: ${{ secrets.MY_HEXO_DEPLOY }}
+    - name: Install dependencies
       run: |
-        
-        mkdir -p ~/.ssh/
-        echo "$ACTION_DEPLOY_KEY" | tr -d '\r' > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan github.com >> ~/.ssh/known_hosts
-        # set git infomation
-        git config --global user.name 'muxiner' 
-        git config --global user.email 'hz15211522007@163.com'
-        
-        npm i -g hexo-cli
-        npm i
-        npm install hexo-deployer-git
-        npm i -S hexo-generator-search
-        npm i -S hexo-renderer-stylus
-        npm install hexo-wordcount
-        npm install hexo-renderer-pug
-        npm install hexo-asset-image
+        npm install hexo-cli gulp -g
+        npm install
 
-        npm install --global gulp-cli
-        npm install --save-dev gulp
-        npm install gulp-htmlclean --save-dev
-        npm install --save gulp-htmlmin
-        npm install gulp-clean-css --save-dev
-        npm install --save-dev gulp-uglify
-        npm install terser
-        npm install --save-dev gulp-imagemin
+    - name: Generate files
+      run: hexo generate
 
+    - name: Execute gulp task
+      run: gulp
 
-    - name: Deploy
+    - name: Deploy blog
       run: |
-        hexo clean
-        gulp
-        hexo generate
-        hexo deploy
+        git clone "https://${{ secrets.GH_REF }}" deploy_git
+        mv ./deploy_git/.git ./public/
+        cd ./public
+        git config user.name "muxiner"
+        git config user.email "hz15211522007@163.com"
+        git add .
+        git commit -m "GitHub Actions Auto Builder at $(date +'%Y-%m-%d %H:%M:%S')"
+        git push --force --quiet "https://${{ secrets.GH_TOKEN }}@${{ secrets.GH_REF }}" master:master
