@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+
+
+
 jobs:
   blog-cicd:
     name: Hexo blog build & deploy
@@ -47,6 +50,7 @@ jobs:
         npm install hexo-asset-image
 
         npm install --global gulp-cli
+        npm install --save-dev gulp
         npm install gulp-htmlclean --save-dev
         npm install --save gulp-htmlmin
         npm install gulp-clean-css --save-dev
@@ -54,10 +58,10 @@ jobs:
         npm install terser
         npm install --save-dev gulp-imagemin
 
- 
+
     - name: Deploy
       run: |
         hexo clean
-        hexo generate
         gulp
+        hexo generate
         hexo deploy
