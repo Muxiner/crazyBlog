@@ -9,13 +9,13 @@
 menu:
    Home: / || fas fa-home
    Archives: /archives/ || fas fa-archive
-  # Tags: /tags/ || fas fa-tags
-  # Categories: /categories/ || fas fa-folder-open
+   Tags: /tags/ || fas fa-tags
+   Categories: /categories/ || fas fa-folder-open
   # List||fas fa-list:
   #   - Music || /music/ || fas fa-music
   #   - Movie || /movies/ || fas fa-video
    
-   Link: /link/ || fas fa-link
+   #Link: /link/ || fas fa-link
    About: /about/ || fas fa-heart
 
    # Hide the child menu items in mobile sidebar
@@ -33,7 +33,7 @@ code_word_wrap: true
 # copy settings
 # copyright: Add the copyright information after copied content (複製的內容後面加上版權信息)
 copy:
-  enable: false
+  enable: true
   copyright:
     enable: false
     limit_count: 50
@@ -90,9 +90,9 @@ avatar:
 # The banner image of home page
 index_img: /Images/topimg.jpg
 # 主页的top_img
-default_top_img:
+default_top_img: /Images/default.jpg
 # 默认的top_img，当页面的top_img没有配置时，会显示default_top_img
-archive_img:
+archive_img: /Images/default.jpg
 # 归档页面的top_img
 tag_img	tag: 
 # 子页面 的 默认 top_img
@@ -100,7 +100,7 @@ tag_per_img:
 # tag 子页面的 top_img，可配置每个 tag 的 top_img
 category_img: 
 # category 子页面 的 默认 top_img
-category_per_img:
+category_per_img: 
 # category 子页面的 top_img，可配置每个 category 的 top_img
 
 cover:
@@ -114,6 +114,11 @@ cover:
   # 当没有设置cover时，默认的封面显示
 
   default_cover: 
+    - /source/cover/33.jpg
+    - /source/cover/34.jpg
+    - /source/cover/35.jpg
+    - /source/cover/36.jpg
+    - /source/cover/37.jpg
 
 
 # Replace Broken Images (替換無法顯示的圖片)
@@ -233,7 +238,7 @@ comments:
   # Up to two comments system, the first will be shown as default
   # Choose: Disqus/Disqusjs/Livere/Gitalk/Valine/Utterances/Facebook Comments
   use:
-   - Valine
+  # - Valine
   # - Disqus
   text: true # Display the comment name next to the button
   # lazyload: The comment system will be load when comment element enters the browser's viewport.
@@ -446,16 +451,16 @@ yandex_site_verification:
 
  theme_color:
    enable: true
-   main: "#fee9e4"
-   paginator: "#00c4b6"
-   button_hover: "#FF7242"
-   text_selection: "#00c4b6"
+   main: "#434A54"
+   paginator: "#696969"
+   button_hover: "#696969"
+   text_selection: "#696969"
    link_color: "#99a9bf"
-   meta_color: "#858585"
-   hr_color: "#A4D8FA"
-   code_foreground: "#F47466"
-   code_background: "rgba(27, 31, 35, .05)"
-   toc_color: "#00c4b6"
+   meta_color: "#696969"
+   hr_color: "#696969"
+   code_foreground: "#696969"
+   code_background: "#696969"
+   toc_color: "#696969"
    blockquote_padding_color: "#49b1f5"
    blockquote_background_color: "#49b1f5"
 
@@ -475,7 +480,7 @@ tag_ui: # 留空或 index
 # 图片格式 url(http://xxxxxx.com/xxx.jpg)
 # 颜色（HEX值/RGB值/顔色单词/渐变色)
 # 留空 不显示背景
-background: url(/Images/background.jpg)   # "#f1eae9"
+background:   url(/Images/background.jpg)  #"#f1eae9"  
 
 
 # footer是否显示图片背景(与top_img一致)
@@ -531,8 +536,8 @@ fireworks:
 
 # Mouse click effects: Heart symbol (鼠標點擊效果: 愛心)
 click_heart:
-  enable: false
-  mobile: false
+  enable: true
+  mobile: true
 
 # Mouse click effects: words (鼠標點擊效果: 文字)
 ClickShowText:
@@ -617,17 +622,17 @@ aside:
     description: 
     button:
       icon: fab fa-github
-      text: Follow Me
+      text: FOLLOW ME
       link: https://github.com/Muxiner
   card_announcement:
-    enable: true
+    enable: false
     content: This is my Blog
   card_recent_post:
-    enable: true
+    enable: false
     limit: 5 # if set 0 will show all
     sort: date # date or updated
   card_categories:
-    enable: true
+    enable: false
     limit: 8 # if set 0 will show all
     expand: none # none/true/false
   card_tags:
@@ -635,22 +640,22 @@ aside:
     limit: 40 # if set 0 will show all
     color: true
   card_archives:
-    enable: true
+    enable: false
     type: monthly # yearly or monthly
     format: MMMM YYYY # eg: YYYY年MM月
     order: -1 # Sort of order. 1, asc for ascending; -1, desc for descending
     limit: 8 # if set 0 will show all
   card_webinfo:
     enable: true
-    post_count: true
+    post_count: false
     last_push_date: true
 
 # busuanzi count for PV / UV in site
 # 訪問人數
 busuanzi:
-  site_uv: true
-  site_pv: true
-  page_pv: true
+  site_uv: false
+  site_pv: false
+  page_pv: false
 
 # Time difference between publish date and now (網頁運行時間)
 # Formal: Month/Day/Year Time or Year/Month/Day Time
