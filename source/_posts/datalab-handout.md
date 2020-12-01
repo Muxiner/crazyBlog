@@ -50,9 +50,9 @@ int bitXor(int x, int y) {
 法2：
 
 + 利用《数字逻辑》的知识：异或运算 德摩根律
-> x ^ y = (x & ~y) | (~x & y)  
-> = ~((x & ~y) | (~x & y))  
-> = ~(~(x & ~y) & ~(~x & y))  D
+> x ^ y = (x & \~y) | (\~x & y)  
+> = \~((x & \~y) | (\~x & y))  
+> = \~(\~(x & \~y) & \~(\~x & y))  D
 
 ```c
 int bitXor(int x, int y) {
@@ -103,7 +103,7 @@ int isTmax(int x) {
 > 2147483647   10进制  
 > 0111 1111 1111 1111 1111 1111 1111 1111    2进制(32位系统)
 
-> Tmax满足:  Tmax = ~(Tmax + 1)    Tmax ^ (~(Tmax + 1)) = 0  
+> Tmax满足:  Tmax = \~(Tmax + 1)    Tmax ^ (\~(Tmax + 1)) = 0  
 0xFFFFFFFF也满足上述关系，但0xFFFFFFFF + 1 为 0, 所以要排除这种情况。  
 
 ```c
@@ -129,7 +129,7 @@ int allOddBits(int x) {
 ```
 判断一个二进制数奇数位是否全为1  
 思路:  
-若x奇数位全为1，则~x的奇数位全为0，则~x & 0xaaaaaaaa 使得全部为0。
+若x奇数位全为1，则\~x的奇数位全为0，则\~x & 0xaaaaaaaa 使得全部为0。
 ```
 int allOddBits(int x) {
   return !(~x & 0xaaaaaaaa);
