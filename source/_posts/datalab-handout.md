@@ -72,8 +72,7 @@ int bitXor(int x, int y) {
 int tmin(void) {
   return 2;
 }
-```  
-
+```
 * 题意：输出反码下的最小值
 * 思路：直接由定义得最小值  
 
@@ -81,10 +80,8 @@ int tmin(void) {
 int tmin(void) {
   return 1 << 31;
 }
-```  
-
+```
 ### 3.isTmax函数  
-
 ```c
 /*
  * isTmax - returns 1 if x is the maximum, two's complement number,
@@ -97,7 +94,6 @@ int isTmax(int x) {
   return 2;
 }
 ```
-
 判断一个数是否为有符号数的最大值Tmax，即  
 > 0x7FFFFFFF   16进制  
 > 2147483647   10进制  
