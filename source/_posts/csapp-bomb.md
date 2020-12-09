@@ -1,5 +1,5 @@
 ---
-title: 解决Github + hexo网页无法显示图片问题
+title: CSAPP：BOMB实验
 date: 2020-12-9 20:08:50
 categories: 实验记录
 tags:
