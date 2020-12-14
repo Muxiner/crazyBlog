@@ -874,7 +874,8 @@ call   xxxxxxx <phase_defused>
  8049363:	83 3d c8 c3 04 08 06 	cmpl   $0x6,0x804c3c8 
                                        // 0x804c3c8 与 6比较
                                        // 经GDB查看后发现0x804c3c8指向<num_input_strings>:"\005"
-                                       // 其中"\005"是调试时处于phase_5得到的值
+                                       // 其中"\005"是调试时处于phase_5得到的值x
+                                       // 在不同得phase阶段查此地址会得到不同的"\00x",x取决于第几个
                                        // 所以 这一行是判断密码输入的次数是否 = 6
  804936a:	75 6e                	jne    80493da <phase_defused+0x8b>
  804936c:	8d 45 a4             	lea    -0x5c(%ebp),%eax 
@@ -886,28 +887,36 @@ call   xxxxxxx <phase_defused>
  804937a:	8d 45 9c             	lea    -0x64(%ebp),%eax
  804937d:	89 44 24 08          	mov    %eax,0x8(%esp) 
                                                       // esp+8 = ebp -100
-                                       //(不看了，呸不看个锤子，继续看。)
+                                       
  8049381:	c7 44 24 04 b1 a4 04 	movl   $0x804a4b1,0x4(%esp)
                                        // GDB查看得 "%d %d %s"
+                                       // 表示需要如此输入，经提示，我们知道了在第四关以这样得格式输入。
  8049388:	08 
  8049389:	c7 04 24 d0 c4 04 08 	movl   $0x804c4d0,(%esp)
                                        // 得 <input_strings + 240> : "6 6" (有点熟悉)
                                        
  8049390:	e8 cb f4 ff ff       	call   8048860 <__isoc99_sscanf@plt>
- 8049395:	83 f8 03             	cmp    $0x3,%eax
+ 8049395:	83 f8 03             	cmp    $0x3,%eax 
+                                       // 如果返回的输入个数不等于三跳转至80493ce，否则顺序执行
  8049398:	75 34                	jne    80493ce <phase_defused+0x7f>
  804939a:	c7 44 24 04 ba a4 04 	movl   $0x804a4ba,0x4(%esp)
+                                       // 易知地址中为"DrEvil"
+                                       // 不会是进入的密码呢，再往下看看
  80493a1:	08 
  80493a2:	8d 45 a4             	lea    -0x5c(%ebp),%eax
- 80493a5:	89 04 24             	mov    %eax,(%esp)
+ 80493a5:	89 04 24             	mov    %eax,(%esp) //esp=ebp-92
  80493a8:	e8 15 fd ff ff       	call   80490c2 <strings_not_equal>
- 80493ad:	85 c0                	test   %eax,%eax
+                                       // 字符比较
+ 80493ad:	85 c0                	test   %eax,%eax //应该是判断输入的字符是否为"DrEvil"
  80493af:	75 1d                	jne    80493ce <phase_defused+0x7f>
- 80493b1:	c7 04 24 80 a3 04 08 	movl   $0x804a380,(%esp)
+ 80493b1:	c7 04 24 80 a3 04 08 	movl   $0x804a380,(%esp) 
+                                       
  80493b8:	e8 33 f4 ff ff       	call   80487f0 <puts@plt>
  80493bd:	c7 04 24 a8 a3 04 08 	movl   $0x804a3a8,(%esp)
+
  80493c4:	e8 27 f4 ff ff       	call   80487f0 <puts@plt>
  80493c9:	e8 cf fb ff ff       	call   8048f9d <secret_phase>
+                                       //以上就是发现secret_phase需要进行得操作
  80493ce:	c7 04 24 e0 a3 04 08 	movl   $0x804a3e0,(%esp)
  80493d5:	e8 16 f4 ff ff       	call   80487f0 <puts@plt>
  80493da:	8b 45 f4             	mov    -0xc(%ebp),%eax
@@ -926,32 +935,39 @@ call   xxxxxxx <phase_defused>
  80493fd:	66 90                	xchg   %ax,%ax
  80493ff:	90                   	nop
 ```
+上面几个地址中存在的值如图  
+![](/csapp-bomb/findphase.png)  
+
+经分析可知，secret_phase的进入需要我们成功解除了前六个炸弹后并在第四关以"%d %d %s"的格式输入"6 6 DrEvil"。
+
 ```text
 08048f9d <secret_phase>:
  8048f9d:	55                   	push   %ebp
  8048f9e:	89 e5                	mov    %esp,%ebp
  8048fa0:	53                   	push   %ebx
- 8048fa1:	83 ec 14             	sub    $0x14,%esp
+ 8048fa1:	83 ec 14             	sub    $0x14,%esp//开栈
  8048fa4:	e8 a8 02 00 00       	call   8049251 <read_line>
- 8048fa9:	c7 44 24 08 0a 00 00 	movl   $0xa,0x8(%esp)
+ 8048fa9:	c7 44 24 08 0a 00 00 	movl   $0xa,0x8(%esp) //esp+8 = 10
  8048fb0:	00 
- 8048fb1:	c7 44 24 04 00 00 00 	movl   $0x0,0x4(%esp)
+ 8048fb1:	c7 44 24 04 00 00 00 	movl   $0x0,0x4(%esp) //esp+4=0
  8048fb8:	00 
- 8048fb9:	89 04 24             	mov    %eax,(%esp)
+ 8048fb9:	89 04 24             	mov    %eax,(%esp) 
  8048fbc:	e8 0f f9 ff ff       	call   80488d0 <strtol@plt>
  8048fc1:	89 c3                	mov    %eax,%ebx
  8048fc3:	8d 40 ff             	lea    -0x1(%eax),%eax
- 8048fc6:	3d e8 03 00 00       	cmp    $0x3e8,%eax
+ 8048fc6:	3d e8 03 00 00       	cmp    $0x3e8,%eax //if 0x3e8 <= eax,跳转，否则爆炸
  8048fcb:	76 05                	jbe    8048fd2 <secret_phase+0x35>
  8048fcd:	e8 05 02 00 00       	call   80491d7 <explode_bomb>
- 8048fd2:	89 5c 24 04          	mov    %ebx,0x4(%esp)
- 8048fd6:	c7 04 24 88 c0 04 08 	movl   $0x804c088,(%esp)
- 8048fdd:	e8 68 ff ff ff       	call   8048f4a <fun7>
- 
- 8048fe2:	83 f8 05             	cmp    $0x5,%eax
 
+ 8048fd2:	89 5c 24 04          	mov    %ebx,0x4(%esp)
+                                       //ebx中值为输入的参数
+ 8048fd6:	c7 04 24 88 c0 04 08 	movl   $0x804c088,(%esp)
+                                       //进入递归的参数
+ 8048fdd:	e8 68 ff ff ff       	call   8048f4a <fun7>
+ 8048fe2:	83 f8 05             	cmp    $0x5,%eax 
  8048fe5:	74 05                	je     8048fec <secret_phase+0x4f>
  8048fe7:	e8 eb 01 00 00       	call   80491d7 <explode_bomb>
+                                       //只有当递归的返回值等于5时，不引爆炸弹
  8048fec:	c7 04 24 20 a3 04 08 	movl   $0x804a320,(%esp)
  8048ff3:	e8 f8 f7 ff ff       	call   80487f0 <puts@plt>
  8048ff8:	e8 52 03 00 00       	call   804934f <phase_defused>
@@ -967,82 +983,107 @@ call   xxxxxxx <phase_defused>
  804900d:	66 90                	xchg   %ax,%ax
  804900f:	90                   	nop
  ```
+分析得secret_phase需要我们输入一个值，该值与0x804c088中的值一起进入递归函数，需使得递归返回值 = 5。  
+
+分析Func7 ：
+
  ```text
 08048f4a <fun7>:
  8048f4a:	55                   	push   %ebp
  8048f4b:	89 e5                	mov    %esp,%ebp
  8048f4d:	53                   	push   %ebx
- ------------
  8048f4e:	83 ec 14             	sub    $0x14,%esp
- 8048f51:	8b 55 08             	mov    0x8(%ebp),%edx
- 8048f54:	8b 4d 0c             	mov    0xc(%ebp),%ecx
- 8048f57:	85 d2                	test   %edx,%edx
+ 8048f51:	8b 55 08             	mov    0x8(%ebp),%edx //最开始是0x804c088中的值，记作参数one
+ 8048f54:	8b 4d 0c             	mov    0xc(%ebp),%ecx //最开始是我们需要的参数，记作参数two
+ 8048f57:	85 d2                	test   %edx,%edx //edx为0 返回-1
  8048f59:	74 37                	je     8048f92 <fun7+0x48>
- 
-
- 8048f5b:	8b 1a                	mov    (%edx),%ebx
- 8048f5d:	39 cb                	cmp    %ecx,%ebx
- 8048f5f:	7e 13                	jle    8048f74 <fun7+0x2a>
+------------------
+ 8048f5b:	8b 1a                	mov    (%edx),%ebx //ebx = *edx
+ 8048f5d:	39 cb                	cmp    %ecx,%ebx //if ecx <= ebx 跳转
+ 8048f5f:	7e 13                	jle    8048f74 <fun7+0x2a> 
  8048f61:	89 4c 24 04          	mov    %ecx,0x4(%esp)
  8048f65:	8b 42 04             	mov    0x4(%edx),%eax
- 8048f68:	89 04 24             	mov    %eax,(%esp)
+ 8048f68:	89 04 24             	mov    %eax,(%esp)//(edx+4, ecx)两个参数进入递归
  8048f6b:	e8 da ff ff ff       	call   8048f4a <fun7>
-
- 8048f70:	01 c0                	add    %eax,%eax
-
+ 8048f70:	01 c0                	add    %eax,%eax//返回值=递归返回值*2
  8048f72:	eb 23                	jmp    8048f97 <fun7+0x4d>
- 8048f74:	b8 00 00 00 00       	mov    $0x0,%eax
- 8048f79:	39 cb                	cmp    %ecx,%ebx
- 8048f7b:	74 1a                	je     8048f97 <fun7+0x4d>
+ ------------------
+ 8048f74:	b8 00 00 00 00       	mov    $0x0,%eax //eax = 0
+ 8048f79:	39 cb                	cmp    %ecx,%ebx 
+ 8048f7b:	74 1a                	je     8048f97 <fun7+0x4d> 
+                                       //if ecx == ebx 结束递归
  8048f7d:	89 4c 24 04          	mov    %ecx,0x4(%esp)
  8048f81:	8b 42 08             	mov    0x8(%edx),%eax
- 8048f84:	89 04 24             	mov    %eax,(%esp)
+ 8048f84:	89 04 24             	mov    %eax,(%esp) //(*(edx+8),ecx)两个参数进入递归
  8048f87:	e8 be ff ff ff       	call   8048f4a <fun7>
-
  8048f8c:	8d 44 00 01          	lea    0x1(%eax,%eax,1),%eax
+                                       // 返回值 = 递归返回值*2 + 1
  8048f90:	eb 05                	jmp    8048f97 <fun7+0x4d>
+--------------------
  8048f92:	b8 ff ff ff ff       	mov    $0xffffffff,%eax
  8048f97:	83 c4 14             	add    $0x14,%esp
- ---------
-
  8048f9a:	5b                   	pop    %ebx
  8048f9b:	5d                   	pop    %ebp
  8048f9c:	c3                   	ret    
 ```
+进行一波困难的逆向得Func7的C语言代码:  
 ```c
-int fun7(int *a, int b)
+int func7(int *a, int b)
 {
-	if (a == NULL)
-		return -1;
-	int ret = 0;
-	if (*a - b > 0)
-	{
-		ret = fun7(*(a + 4), b);
-		ret *= 2
-	}
-	else if (*a - b == 0)
-		return 0;
-	else
-	{
-		ret = fun7(*(a + 8), b);
-		ret = ret * 2 + 1;
-	}
-	return ret;
+    if (a == NULL)
+      return -1;
+    
+    int result = 0;
+    if (*a > b)
+    if (*a == b)
+        return 0;
+      else
+      {
+        result = func7(*(a + 8), b);
+        return 2 * result + 1;
+      }
+
+    else 
+    {
+      result = func7(*(a + 4), b);  
+      return 2 * result;
+    }
 }
 ```
-一共递归
-*a – b < 0
-*a – b > 0
-*a – b < 0
-*a – b == 0
-用GDB查看0x804c088后得到
-1）0x804c088=0x24，之后在*a-b<0 (0x24 – b < 0)的分支中*(a + 8)= 0x804c090，所以fun7(0x804c090, b)。
-2）*0x804c090=0x32，*a-b>0 (0x32 - b > 0)，递归fun7(*(0x804c090 + 4) = 0x804c094, b)。
-3）*0x804c094=0x2d，*a-b<0 (0x2d - b < 0)，fun7(*(0x804c094 + 8) = 0x804c09c, b)。
-4）*0x804c09c =0x2f，*a – b == 0 (0x2f – b == 0)，所以b = 0x2f，递归返回。
+由于最后的返回值是5，根据函数的结构可以想到这样的结构：
+> a \* 2 + 1 = 5 ————> b \* 2 = a ————> c \* 2 + 1 = b ————> c = 0  
+
+即*a、b的关系为  
+> \*a < b ————> \*a > b ————> \*a < b————> \*a == b
+
+所以一共递归
+> \*a – b > 0
+> \*a – b < 0
+> \*a – b > 0
+> \*a – b == 0
+
+
+用GDB查看`0x804c088`后得到
+1. `0x804c088 = 0x24`，之后在`*a - b < 0 (0x24 – b < 0)`的分支中`*(a + 8)= 0x804c090`，所以`func7(0x804c090, b)`。
+2. `*0x804c090 = 0x32`，`*a - b > 0 (0x32 - b > 0)`，递归`fun7(*(0x804c090 + 4) = 0x804c094, b)`。
+3. `*0x804c094 = 0x2d`，`*a - b < 0 (0x2d - b < 0)`，`fun7(*(0x804c094 + 8) = 0x804c09c, b)`。
+4. `*0x804c09c = 0x2f`，`*a – b == 0 (0x2f – b == 0)`，所以`b = 0x2f`，递归返回。
+![](/csapp-bomb/)
 得到3个不等式和一个等式：
-1) 0x24 – 0x2f < 0
-2) 0x32 – 0x2f > 0
-3) 0x2d – 0x2f < 0
-4) b = 0x2f
+
+1. `0x24 – 0x2f < 0`
+2. `0x32 – 0x2f > 0`
+3. `0x2d – 0x2f < 0`
+4. `b = 0x2f`
 转为十进制 b = 47，故隐藏关卡密码为47。
+
+淦！！！！！！！  
+
+以上是正常情况下应该得出理解答案的结果，但是事实并不如我想象。操作后并没有得到答案。但是答案确实是47。  
+通过不断的查找，发现存着47的地址在老后面了，完全不对啊。 淦，问题真多。
+
+### 结果 
+![](.csapp-bomb/result.png)
+
+### 淦
+不干了，淦。实验很不错，结果很离谱，头发快没了，心态早崩了。
