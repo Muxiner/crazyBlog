@@ -8,8 +8,8 @@ tags:
 cover: /Images/11.jpg
 ---
 
-<b><font face="华文行楷" color = "gray" size = "7">生活的意义</font></b>
-<p align = "right"><font face = "楷体" color = "gray" size = "4">某娟的小狐狸</font></p>
+<b><font face="楷体" color = "gray" size = "7">生活的意义</font></b>
+<p align = "right"><font face = "楷体" color = "gray" size = "4">muxiner的小娇妻</font></p>
 -----
 &#8195;&#8195;庚子年的冬天，寂寥而悲壮，萧索而又豪迈。万家阖门闭户，息交绝游；道路不通，商旅不行，喇叭声咽，都在空城……一场突如其来的灾难改变了世界的面貌，也在潜移默化中改变着人们对于生活的认识，使得人们开始重新审视、思考生活的意义。 
 
