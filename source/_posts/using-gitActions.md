@@ -1,10 +1,9 @@
 ---
 title: 使用Github Actions实现Hexo博客在Github上的自动部署
 date: 2020-11-30 16:55:45
-categories: Blog
+categories: Blogs
 tags: 
 - Github
-- Blog
   
 cover: /Images/14.jpg
 ---

@@ -5,8 +5,6 @@ categories: 实验记录
 tags:
 - 计算机基础
 - Csapp
-- 汇编语言
-- Linux
 cover: /Images/20.jpg
 ---
 

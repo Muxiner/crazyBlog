@@ -5,9 +5,8 @@ categories: 实验记录
 tags: 
 - 计算机系统
 - 位计算
-- Ubuntu
-- 实验记录
-cover: /Images/10.jpg
+- Csapp
+cover: /Images/7.jpg
 ---
 
 ## 实验开始

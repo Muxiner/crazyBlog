@@ -6,7 +6,7 @@ tags:
 - Vscode
 - C\C++
   
-cover:  /Images/37.ipg
+cover:  /Images/30.ipg
 ---
 
 
