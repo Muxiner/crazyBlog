@@ -1,0 +1,46 @@
+- class_name: 友情链接
+  class_desc: 众人拾柴火焰高
+  link_list:
+    - name: Elepover's Blog
+      link: https://daily.elepover.com/
+      avatar: /link_images/elepover.png
+      descr: In the sight, there shines light.
+  
+    - name: Munnner
+      link: https://munnner.github.io
+      avatar:
+      descr: The timing of love
+
+
+- class_name: Website
+  class_desc: Websites I May Need
+  link_list:
+    - name: Github
+      link: https://www.github.com
+      avatar: /link_images/github.png
+      descr: 面向开源及私有软件项目的托管平台
+
+    - name: 菜鸟教程
+      link: https://www.runoob.com
+      avatar: /link_images/runoob.png
+      descr: 学习圣地
+
+    - name: bilibili弹幕网
+      link: https://www.bilibili.com
+      avatar: /link_images/bilibili.png
+      descr: 中国年轻世代高度聚集的文化社区和视频平台
+
+    - name: 低端影视
+      link: https://ddrk.me
+      avatar: 
+      descr: 免费高质量视频
+
+    - name: MSDN,我告诉你
+      link: https://msdn.itellyou.cn/
+      avatar:
+      descr: 个人性质的原版软件信息收录站点
+
+    - name: 计算机教育中缺失的一课
+      link: 个人性质的原版软件信息收录站点
+      avatar:
+      descr: 
