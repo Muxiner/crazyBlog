@@ -7,16 +7,16 @@
 #   name || link || icon
 
 menu:
-   Home: / || fas fa-home
-   Archives: /archives/ || fas fa-archive
-   Tags: /tags/ || fas fa-tags
-   Categories: /categories/ || fas fa-folder-open
-  # List||fas fa-list:
-  #   - Music || /music/ || fas fa-music
-  #   - Movie || /movies/ || fas fa-video
-   
-   Link: /link/ || fas fa-link
-   About: /about/ || fas fa-heart
+   首页: / || fas fa-home
+   归档: /archives/ || fas fa-archive
+   标签: /tags/ || fas fa-tags
+   分类: /categories/ || fas fa-folder-open
+   List||fa-fw fa fa-heartbeat:
+   #  - Music || /music/ || fas fa-music
+   #  - Movie || /movies/ || fas fa-video
+     - Gallery || /GalleryGroup/ || fa-fw fas fa-images
+   链接: /link/ || fas fa-link
+   关于: /about/ || fas fa-heart
 
    # Hide the child menu items in mobile sidebar
 hide_sidebar_menu_child: false
@@ -24,7 +24,7 @@ hide_sidebar_menu_child: false
 # Code Blocks (代碼相關)
 # --------------------------------------
 
-highlight_theme: pale night #  darker / pale night / light / ocean / mac / mac light / false
+highlight_theme: mac #  darker / pale night / light / ocean / mac / mac light / false
 highlight_copy: true # copy button
 highlight_lang: true # show the code language
 highlight_shrink: false # true: shrink the code blocks / false: expand the code blocks | none: expand code blocks and hide the button
@@ -114,11 +114,11 @@ cover:
   # 当没有设置cover时，默认的封面显示
 
   default_cover: 
-    - /source/cover/33.jpg
-    - /source/cover/34.jpg
-    - /source/cover/35.jpg
-    - /source/cover/36.jpg
-    - /source/cover/37.jpg
+   # - /source/cover/33.jpg
+   # - /source/cover/34.jpg
+   # - /source/cover/35.jpg
+   # - /source/cover/36.jpg
+   # - /source/cover/37.jpg
 
 
 # Replace Broken Images (替換無法顯示的圖片)
@@ -128,20 +128,20 @@ error_img:
 
 # A simple 404 page
 error_404:
-  enable: false
+  enable: true
   subtitle: 'Page Not Found'
   background: https://i.loli.net/2020/05/19/aKOcLiyPl2JQdFD.png
 
 post_meta:
   page:
     date_type: both # created or updated or both 主页文章日期是创建日或者更新日或都显示
-    date_format: relative # date/relative 显示日期还是相对日期
+    date_format: date # date/relative 显示日期还是相对日期
     categories: true # true or false 主页是否显示分类
     tags: true # true or false 主页是否显示标籤
     label: true # true or false 显示描述性文字
   post:
     date_type: both # created or updated or both 文章页日期是创建日或者更新日或都显示
-    date_format: relative # date/relative 显示日期还是相对日期
+    date_format: date # date/relative 显示日期还是相对日期
     categories: true # true or false 文章页是否显示分类
     tags: true # true or false 文章页是否显示标籤
     label: true # true or false 显示描述性文字
@@ -203,12 +203,12 @@ anchor: false
 
 # Displays outdated notice for a post (文章過期提醒)
 noticeOutdate:
-  enable: false
+  enable: ture
   style: flat # style: simple/flat
-  limit_day: 500 # When will it be shown
+  limit_day: 180 # When will it be shown
   position: top # position: top/bottom
-  message_prev: It has been
-  message_next: days since the last update, the content of the article may be outdated.
+  message_prev: 距离上次更新已经
+  message_next: 天了，文章的内容可能已经过时了。
 
 # Share System (分享功能)
 # --------------------------------------
@@ -376,7 +376,7 @@ footer:
   owner:
     enable: true
     since: 2020
-  custom_text: Thank you for coming my <a href="https://butterfly.js.org/">blog</a>!
+  custom_text: Thank You For Coming My Blog!
   copyright: false # Copyright of theme and framework
   ICP: # Chinese ICP License
     enable: false
@@ -450,19 +450,19 @@ yandex_site_verification:
 # Notice: color value must in double quotes like "#000" or may cause error!
 
  theme_color:
-   enable: true
-   main: "#434A54"
-   paginator: "#696969"
-   button_hover: "#696969"
-   text_selection: "#696969"
-   link_color: "#99a9bf"
-   meta_color: "#696969"
-   hr_color: "#696969"
-   code_foreground: "#696969"
-   code_background: "#696969"
-   toc_color: "#696969"
-   blockquote_padding_color: "#49b1f5"
-   blockquote_background_color: "#49b1f5"
+   enable: ture
+   main: "#E74C3C"
+   paginator: "#E74C3C"
+   button_hover: "#E74C3C"
+   text_selection: "#E74C3C"
+   link_color: "#E74C3C"
+   meta_color: "#E74C3C"
+   hr_color: "#E74C3C"
+   code_foreground: "#E74C3C"
+   code_background: "#E74C3C"
+   toc_color: "#E74C3C"
+   blockquote_padding_color: "#E74C3C"
+   blockquote_background_color: "#E74C3C"
 
 # 主页设置
 # 默认top_img全屏，site_info在中间
