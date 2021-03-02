@@ -453,7 +453,7 @@ yandex_site_verification:
    enable: ture
    main: "#E74C3C"
    paginator: "#E74C3C"
-   button_hover: "#E74C3C"
+   button_hover: "#e74c3c"
    text_selection: "#E74C3C"
    link_color: "#E74C3C"
    meta_color: "#E74C3C"
