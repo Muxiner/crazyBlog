@@ -7,18 +7,18 @@
 #   name || link || icon
 
 menu:
-   首页: / || fas fa-home
-   归档: /archives/ || fas fa-archive
-   标签: /tags/ || fas fa-tags
-   分类: /categories/ || fas fa-folder-open
-   List||fa-fw fa fa-heartbeat:
-   #  - Music || /music/ || fas fa-music
-   #  - Movie || /movies/ || fas fa-video
-     - Gallery || /GalleryGroup/ || fa-fw fas fa-images
-   链接: /link/ || fas fa-link
-   关于: /about/ || fas fa-heart
+  首页: / || fas fa-home
+  归档: /archives/ || fas fa-archive
+  标签: /tags/ || fas fa-tags
+  分类: /categories/ || fas fa-folder-open
+  List||fa-fw fa fa-heartbeat:
+    #  - Music || /music/ || fas fa-music
+    #  - Movie || /movies/ || fas fa-video
+    - Gallery || /GalleryGroup/ || fa-fw fas fa-images
+  链接: /link/ || fas fa-link
+  关于: /about/ || fas fa-heart
 
-   # Hide the child menu items in mobile sidebar
+  # Hide the child menu items in mobile sidebar
 hide_sidebar_menu_child: false
 
 # Code Blocks (代碼相關)
@@ -42,7 +42,7 @@ copy:
 # formal:
 #   icon: link || the description
 social:
-   fab fa-github: https://github.com/Muxiner || Github
+  fab fa-github: https://github.com/Muxiner || Github
   # fas fa-envelope: mailto:xxxxxx@gmail.com || Email
 
 # search (搜索)
@@ -94,13 +94,13 @@ default_top_img: /Images/default.jpg
 # 默认的top_img，当页面的top_img没有配置时，会显示default_top_img
 archive_img: /Images/default.jpg
 # 归档页面的top_img
-tag_img	tag: 
+tag_img	tag:
 # 子页面 的 默认 top_img
-tag_per_img: 
+tag_per_img:
 # tag 子页面的 top_img，可配置每个 tag 的 top_img
-category_img: 
+category_img:
 # category 子页面 的 默认 top_img
-category_per_img: 
+category_per_img:
 # category 子页面的 top_img，可配置每个 category 的 top_img
 
 cover:
@@ -113,13 +113,12 @@ cover:
   position: both
   # 当没有设置cover时，默认的封面显示
 
-  default_cover: 
-   # - /source/cover/33.jpg
-   # - /source/cover/34.jpg
-   # - /source/cover/35.jpg
-   # - /source/cover/36.jpg
-   # - /source/cover/37.jpg
-
+  default_cover:
+    # - /source/cover/33.jpg
+    # - /source/cover/34.jpg
+    # - /source/cover/35.jpg
+    # - /source/cover/36.jpg
+    # - /source/cover/37.jpg
 
 # Replace Broken Images (替換無法顯示的圖片)
 error_img:
@@ -129,7 +128,7 @@ error_img:
 # A simple 404 page
 error_404:
   enable: true
-  subtitle: 'Page Not Found'
+  subtitle: "Page Not Found"
   background: https://i.loli.net/2020/05/19/aKOcLiyPl2JQdFD.png
 
 post_meta:
@@ -145,7 +144,6 @@ post_meta:
     categories: true # true or false 文章页是否显示分类
     tags: true # true or false 文章页是否显示标籤
     label: true # true or false 显示描述性文字
-
 
 # wordcount (字數統計)
 wordcount:
@@ -286,8 +284,8 @@ gitalk:
 # https://valine.js.org
 
 valine:
-  appid:  kTPPMo57e1hzAJi41tLISzkf-MdYXbMMI
-  appkey:  qfRPXANhTGd7woxbIKXy7uee
+  appid: kTPPMo57e1hzAJi41tLISzkf-MdYXbMMI
+  appkey: qfRPXANhTGd7woxbIKXy7uee
   notify: false # 邮件通知者
   verify: false # 验证码
   placeholder: 记得留下你的暱称和邮箱....可以快速收到回復 # 评论框占位符
@@ -305,7 +303,6 @@ valine:
   enableQQ: false # enable the Nickname box to automatically get QQ Nickname and QQ Avatar
   requiredFields: nick,mail # required fields (nick/mail)
   option:
-
 
 # utterances
 # https://utteranc.es/
@@ -442,34 +439,32 @@ qihu_site_verification:
 # Yandex Webmaster tools verification setting
 # see https://webmaster.yandex.com/
 yandex_site_verification:
+  # Beautify/Effect (美化/效果)
+  # --------------------------------------
 
-# Beautify/Effect (美化/效果)
-# --------------------------------------
+  # Theme color for customize
+  # Notice: color value must in double quotes like "#000" or may cause error!
 
-# Theme color for customize
-# Notice: color value must in double quotes like "#000" or may cause error!
-
- theme_color:
-   enable: ture
-   main: "#E74C3C"
-   paginator: "#E74C3C"
-   button_hover: "#e74c3c"
-   text_selection: "#E74C3C"
-   link_color: "#E74C3C"
-   meta_color: "#E74C3C"
-   hr_color: "#E74C3C"
-   code_foreground: "#E74C3C"
-   code_background: "#E74C3C"
-   toc_color: "#E74C3C"
-   blockquote_padding_color: "#E74C3C"
-   blockquote_background_color: "#E74C3C"
+  theme_color:
+    enable: ture
+    main: "#E74C3C"
+    paginator: "#E74C3C"
+    button_hover: "#e74c3c"
+    text_selection: "#E74C3C"
+    link_color: "#E74C3C"
+    meta_color: "#E74C3C"
+    hr_color: "#E74C3C"
+    code_foreground: "#E74C3C"
+    code_background: "#E74C3C"
+    toc_color: "#E74C3C"
+    blockquote_padding_color: "#E74C3C"
+    blockquote_background_color: "#E74C3C"
 
 # 主页设置
 # 默认top_img全屏，site_info在中间
 # 使用默认, 都无需填写（建议默认）
 index_site_info_top: # 主页标题距离顶部距离  例如 300px/300em/300rem/10%
-index_top_img_height:  #主页top_img高度 例如 300px/300em/300rem  不能使用百分比
-
+index_top_img_height: #主页top_img高度 例如 300px/300em/300rem  不能使用百分比
 
 # The user interface setting of category and tag page (category和tag頁的UI設置)
 # index - same as Homepage UI (index 值代表 UI將與首頁的UI一樣)
@@ -480,8 +475,7 @@ tag_ui: # 留空或 index
 # 图片格式 url(http://xxxxxx.com/xxx.jpg)
 # 颜色（HEX值/RGB值/顔色单词/渐变色)
 # 留空 不显示背景
-background:   url(/Images/background.jpg)  #"#f1eae9"  
-
+background: url(/Images/background.jpg) #"#f1eae9"
 
 # footer是否显示图片背景(与top_img一致)
 # Footer Background
@@ -515,7 +509,7 @@ canvas_fluttering_ribbon:
 # https://github.com/hustcc/canvas-nest.js
 canvas_nest:
   enable: false
-  color: '0,0,255' #color of lines, default: '0,0,0'; RGB values: (R,G,B).(note: use ',' to separate.)
+  color: "0,0,255" #color of lines, default: '0,0,0'; RGB values: (R,G,B).(note: use ',' to separate.)
   opacity: 0.7 # the opacity of line (0~1), default: 0.5.
   zIndex: -1 # z-index property of the background, default: -1.
   count: 99 # the number of lines, default: 99.
@@ -558,7 +552,7 @@ beautify:
   enable: true
   field: post # site/post
   title-prefix-icon: '\f0c1'
-  title-prefix-icon-color: '#F47466'
+  title-prefix-icon-color: "#F47466"
 
 # Global font settings
 # Don't modify the following settings unless you know how they work (非必要不要修改)
@@ -619,7 +613,7 @@ aside:
   position: left # left or right
   card_author:
     enable: true
-    description: 
+    description:
     button:
       icon: fab fa-github
       text: FOLLOW ME
@@ -661,7 +655,7 @@ busuanzi:
 # Formal: Month/Day/Year Time or Year/Month/Day Time
 runtimeshow:
   enable: true
-  publish_date: 5/21/2020 6:05:20  
+  publish_date: 5/21/2020 6:05:20
   ##网页开通时间
   #格式: 月/日/年 时间
   #也可以写成 年/月/日 时间
@@ -701,7 +695,6 @@ translate:
   msgToTraditionalChinese: "繁"
   #当文字是繁体时，按钮显示的文字
   msgToSimplifiedChinese: "简"
-
 
 # Read Mode (閲讀模式)
 readmode: true
@@ -784,9 +777,8 @@ aplayerInject:
 snackbar:
   enable: true
   position: bottom-left
-  bg_light: '#858585' #light mode时弹窗背景
-  bg_dark: '#858585' #dark mode时弹窗背景
-
+  bg_light: "#858585" #light mode时弹窗背景
+  bg_dark: "#858585" #dark mode时弹窗背景
 
 # Baidu Push (百度推送)
 baidu_push: false
@@ -833,7 +825,7 @@ fragment_cache: true
 # 插入代码到头部 </head> 之前 和 底部 </body> 之前
 inject:
   head:
-    # - <link rel="stylesheet" href="/xxx.css">
+  # - <link rel="stylesheet" href="/xxx.css">
   bottom:
     # - <script src="xxxx"></script>
 
